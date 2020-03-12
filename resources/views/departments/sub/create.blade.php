@@ -1,0 +1,44 @@
+@extends('layouts.app')
+
+@section('page', 'Create Sub-Department')
+
+@section('content')
+    @include('partials.nav')
+
+    <h2 class="text-xl font-bold text-center my-2">Creating a new {{ $department->name }} sub-department</h2>
+
+    <div class="container mx-auto">
+        <div class="w-2/3 mx-auto">
+            <form action="{{ route('sub-department.store', $department) }}" method="post">
+                @csrf
+                <div class="flex flex-col">
+                    <label class="font-bold text-lg" for="name">Sub-department Name</label>
+                    <input class="border p-2 @error('name') border-red-500 @enderror"
+                           type="text" name="name" id="name"
+                           placeholder="Enter the Name Here..."/>
+
+                    @error('name')
+                    <span class="text-red-500 font-bold">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="flex flex-col mt-6">
+                    <label class="text-lg font-bold" for="description">Sub-department Description</label>
+                    <textarea class="border p-2 @error('description') border-red-500 @enderror"
+                              name="description"
+                              id="description" cols="50" rows="5"
+                              placeholder="Enter the description here..."></textarea>
+
+                    @error('description')
+                    <span class="text-red-500 font-bold">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="clearfix">
+                    <button class="border py-2 px-3 mt-6 float-right bg-orange-500" type="submit">Create Sub-department</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+@endsection
